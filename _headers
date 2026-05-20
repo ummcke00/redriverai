@@ -1,0 +1,4 @@
+/*
+  Content-Security-Policy: "default-src 'self'; script-src 'self' https://automatemybuisness.oph.st https://www.googletagmanager.com https://elevenlabs.io https://www.google-analytics.com https://cdn-cgi.cloudflare.com 'unsafe-inline'; connect-src 'self' https://automatemybuisness.oph.st https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'none';"
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

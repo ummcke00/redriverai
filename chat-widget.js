@@ -119,6 +119,7 @@
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer d869f45e4a6c6399b0a033f013d67d17aeee91cc95308c2143f3955c7e605511'
         },
         body: JSON.stringify({
           message: message,

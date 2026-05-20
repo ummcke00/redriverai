@@ -1,20 +1,41 @@
-// Visitor Logging — ping n8n on every page load
-(function() {
-    try {
-        fetch('https://automatemybuisness.oph.st/webhook/redriverai-visit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                timestamp: new Date().toISOString(),
-                page: window.location.pathname,
-                referrer: document.referrer || 'direct',
-                userAgent: navigator.userAgent,
-                language: navigator.language,
-                screenWidth: window.screen.width
-            })
-        }).catch(() => {}); // silent fail — never interrupts the site
-    } catch(e) {}
-})();
+// Visitor Logging — ping n8n on every page load (with consent)
+// This sends visitor data after user gives consent to our Privacy Policy in compliance with PIPEDA.
+function initializeVisitorLogging() {
+    (function() {
+        try {
+            fetch('https://automatemybuisness.oph.st/webhook/redriverai-visit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer d869f45e4a6c6399b0a033f013d67d17aeee91cc95308c2143f3955c7e605511'
+                },
+                body: JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    page: window.location.pathname,
+                    referrer: document.referrer || 'direct',
+                    language: navigator.language,
+                    screenWidth: window.screen.width
+                    // userAgent removed — strong fingerprinting vector, GA already captures this
+                })
+            }).catch(() => {}); // silent fail — never interrupts the site
+        } catch(e) {}
+    })();
+};
+
+// Initialize tracking based on consent status after everything is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        const consentGiven = localStorage.getItem('cookieConsent') === 'true';
+        if (consentGiven) {
+            initializeVisitorLogging();
+        }
+    });
+} else {
+    const consentGiven = localStorage.getItem('cookieConsent') === 'true';
+    if (consentGiven) {
+        initializeVisitorLogging();
+    }
+}
 
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
@@ -80,6 +101,7 @@ auditForm.addEventListener('submit', async (e) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer d869f45e4a6c6399b0a033f013d67d17aeee91cc95308c2143f3955c7e605511'
             },
             body: JSON.stringify(data)
         });
