@@ -286,6 +286,77 @@ p {
     margin-bottom: 1rem;
 }
 
+/* Projects Section */
+.projects {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.project-card {
+    background-color: var(--white);
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: #cc0000;
+}
+
+.project-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+}
+
+.project-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.project-desc {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.project-tag {
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    border: 1px solid #e0e0e0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.project-metric {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    color: #1a1a2e;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
 /* Audit Section */
 .audit {
     background-color: var(--light-gray);
