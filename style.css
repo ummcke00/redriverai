@@ -357,6 +357,66 @@ p {
     font-weight: 600;
 }
 
+/* AI in Action (Shorts) Section */
+.shorts {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+
+.shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.short-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.short-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #1a1a2e;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.short-frame:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.short-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.short-title {
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--text-dark);
+}
+
+@media (max-width: 768px) {
+    .shorts-grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+    }
+}
+
 /* Audit Section */
 .audit {
     background-color: var(--light-gray);
