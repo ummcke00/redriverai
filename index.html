@@ -259,7 +259,16 @@
                         <input type="text" name="name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Email Address" required>
                         <input type="text" name="businessName" placeholder="Business Name" required>
-                        <textarea name="timeWaster" placeholder="What's your biggest time-waster at work?" rows="4" required></textarea>
+                        <fieldset class="audit-radio-group">
+                            <legend>What's your biggest time-waster?</legend>
+                            <label class="audit-radio"><input type="radio" name="timeWaster" value="Invoicing / billing" required> Invoicing / billing</label>
+                            <label class="audit-radio"><input type="radio" name="timeWaster" value="Customer emails & follow-ups"> Customer emails &amp; follow-ups</label>
+                            <label class="audit-radio"><input type="radio" name="timeWaster" value="Scheduling & appointments"> Scheduling &amp; appointments</label>
+                            <label class="audit-radio"><input type="radio" name="timeWaster" value="Social media posting"> Social media posting</label>
+                            <label class="audit-radio"><input type="radio" name="timeWaster" value="Data entry & reports"> Data entry &amp; reports</label>
+                            <label class="audit-radio"><input type="radio" name="timeWaster" value="Other"> Other</label>
+                            <input type="text" name="otherTimeWaster" id="otherTimeWaster" class="audit-other-input" placeholder="Tell us more..." style="display:none">
+                        </fieldset>
                         <button type="submit" class="btn btn-primary btn-block">Get My Free Audit</button>
                         <p class="form-note">100% free. No credit card required. Results in 24 hours.</p>
                     </form>

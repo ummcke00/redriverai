@@ -412,6 +412,49 @@ p {
     border-color: var(--red);
 }
 
+.audit-radio-group {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.audit-radio-group legend {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin-bottom: 0.25rem;
+}
+
+.audit-radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.audit-radio:hover {
+    border-color: var(--red);
+    background: rgba(26, 26, 46, 0.03);
+}
+
+.audit-radio:has(input:checked) {
+    border-color: var(--red);
+    background: rgba(26, 26, 46, 0.06);
+}
+
+.audit-radio input[type="radio"] {
+    accent-color: var(--red);
+}
+
+.audit-other-input {
+    margin-top: 0.25rem;
+}
+
 .form-note {
     text-align: center;
     color: var(--gray);

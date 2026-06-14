@@ -72,6 +72,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Show/hide "Other" text input
+const timeWasterRadios = document.querySelectorAll('input[name="timeWaster"]');
+const otherInput = document.getElementById('otherTimeWaster');
+
+timeWasterRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+        otherInput.style.display = radio.value === 'Other' ? 'block' : 'none';
+        if (radio.value !== 'Other') otherInput.value = '';
+    });
+});
+
 // Form Handling
 const auditForm = document.getElementById('auditForm');
 const formMessage = document.getElementById('formMessage');
@@ -81,11 +92,15 @@ auditForm.addEventListener('submit', async (e) => {
     
     // Get form data
     const formData = new FormData(auditForm);
+    let timeWaster = formData.get('timeWaster');
+    if (timeWaster === 'Other' && formData.get('otherTimeWaster').trim()) {
+        timeWaster = formData.get('otherTimeWaster').trim();
+    }
     const data = {
         name: formData.get('name'),
         email: formData.get('email'),
         business: formData.get('businessName'),
-        timeWaster: formData.get('timeWaster'),
+        timeWaster: timeWaster,
         timestamp: new Date().toISOString()
     };
     
