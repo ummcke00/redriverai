@@ -235,6 +235,7 @@
                         <span class="project-tag">Auto-Publish</span>
                     </div>
                     <div class="project-metric">Ships daily at 6:30 AM · branded video output · $0 operating cost</div>
+                    <a href="#case-study" class="project-case-link">Read the case study →</a>
                 </div>
             </div>
         </div>
@@ -302,6 +303,64 @@
                     </form>
                     <div class="form-message" id="formMessage"></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section id="case-study" class="case-study">
+        <div class="container">
+            <h2>Case Study: The $0 YouTube Shorts Factory</h2>
+            <p class="section-subtitle">How we built a daily AI-powered content engine — at zero operating cost.</p>
+            
+            <div class="case-study-grid">
+                <div class="cs-card cs-problem">
+                    <h3>The Problem</h3>
+                    <p>Red River AI needed consistent video content to build brand presence — but creating Shorts manually was slow, expensive, and inconsistent. Hiring editors, writing scripts, recording voiceovers, and rendering videos took hours per Short. At scale, that's unsustainable.</p>
+                </div>
+                
+                <div class="cs-card cs-solution">
+                    <h3>The Solution</h3>
+                    <p>A fully automated video pipeline running on a ThinkPad T490s in Winnipeg. RSS feeds scrape AI news daily at 6:30 AM. Gemini Flash writes 50-70 word scripts. ElevenLabs generates voiceovers. FFmpeg composites the branded Short — then n8n uploads it to YouTube, X, and Facebook. All automated. All zero cost.</p>
+                </div>
+                
+                <div class="cs-card cs-stack">
+                    <h3>Tech Stack</h3>
+                    <ul class="cs-stack-list">
+                        <li><strong>n8n</strong> — workflow orchestration & scheduling</li>
+                        <li><strong>OpenRouter</strong> — Gemini Flash via LLM API</li>
+                        <li><strong>ElevenLabs</strong> — AI voice synthesis</li>
+                        <li><strong>FFmpeg</strong> — branded video compositing</li>
+                        <li><strong>FastAPI</strong> — local render service</li>
+                        <li><strong>YouTube / X / Facebook</strong> — multi-platform publish</li>
+                    </ul>
+                </div>
+                
+                <div class="cs-card cs-results">
+                    <h3>Results</h3>
+                    <div class="cs-metrics">
+                        <div class="cs-metric">
+                            <div class="cs-number">$0</div>
+                            <div class="cs-label">monthly operating cost</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-number">30</div>
+                            <div class="cs-label">Shorts per month</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-number">~2 min</div>
+                            <div class="cs-label">human time per Short</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-number">7</div>
+                            <div class="cs-label">feeds scraped daily</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cs-takeaway">
+                <p>A content pipeline that would cost $200-$500/month with SaaS tools — or $2,000+/month with human creators — runs for $0. The only costs are ElevenLabs API credits (still on free tier) and OpenRouter (a few cents per generation). That's automation at prairie prices.</p>
             </div>
         </div>
     </section>

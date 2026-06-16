@@ -357,6 +357,20 @@ p {
     font-weight: 600;
 }
 
+.project-case-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    color: #dc3545;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.project-case-link:hover {
+    color: #a71d2a;
+}
+
 /* AI in Action (Shorts) Section */
 .shorts {
     padding: 80px 0;
@@ -1049,5 +1063,134 @@ p {
     
     .consent-buttons {
         justify-content: center;
+    }
+}
+
+/* ========================================================
+   Case Study Section
+   ======================================================== */
+.case-study {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.case-study h2 {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.case-study .section-subtitle {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.15rem;
+    margin-bottom: 3rem;
+}
+
+.case-study-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.cs-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cs-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.cs-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.cs-problem h3 { color: #dc3545; }
+.cs-solution h3 { color: #198754; }
+.cs-stack h3 { color: #0d6efd; }
+.cs-results h3 { color: #ffc107; }
+
+.cs-card p {
+    color: #495057;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.cs-stack-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cs-stack-list li {
+    padding: 0.4rem 0;
+    color: #495057;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.cs-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.cs-metric {
+    text-align: center;
+    background: white;
+    border-radius: 8px;
+    padding: 1rem 0.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.cs-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
+
+.cs-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cs-takeaway {
+    max-width: 800px;
+    margin: 2rem auto 0;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    border-left: 4px solid #dc3545;
+}
+
+.cs-takeaway p {
+    color: #495057;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .case-study-grid {
+        grid-template-columns: 1fr;
+    }
+    .cs-metrics {
+        grid-template-columns: 1fr 1fr;
+    }
+    .cs-number {
+        font-size: 1.6rem;
     }
 }
