@@ -160,10 +160,6 @@ p {
     transform: translateX(-50%);
 }
 
-.nav-spacer {
-    flex: 1;
-}
-
 .nav-logo a {
     font-size: 1.5rem;
     font-weight: 700;
@@ -177,6 +173,7 @@ p {
     align-items: center;
     gap: 1.5rem;
     white-space: nowrap;
+    margin-left: auto;
 }
 
 .nav-menu a {
