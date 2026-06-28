@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    <meta name="theme-color" content="#0a0a0f">
     <!-- Open Graph / Social preview -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://redriverai.ca/">
@@ -24,7 +25,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <!-- Google Analytics -->
@@ -46,34 +47,348 @@
                 </div>
                 <ul class="nav-menu">
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#audit">Free AI Audit</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="/cdn-cgi/l/email-protection#ee868b828281ae9c8b8a9c87988b9c8f87c08d8fd19d9b8c848b8d9ad3a7c98acbdcde8287858bcbdcde9a81cbdcde8c818185cbdcde8fcbdcde889c8b8bcbdcde8d8f8282c88c818a97d3a687cbdcdeb9878282878f83cbdcadcbdeafcbdeafa7c983cbdcde87809a8b9c8b9d9a8b8acbdcde8780cbdcde828b8f9c80878089cbdcde83819c8bcbdcde8f8c819b9acbdcdebc8b8acbdcdebc87988b9ccbdcdeafa7c0cbdeafcbdeafa397cbdcde808f838bcbddafcbdcdecbdeafa397cbdcde8c9b9d87808b9d9dcbddafcbdcdecbdeafbe8681808bcbdcde809b838c8b9ccbddafcbdcdecbdeafac8b9d9acbdcde9a87838bcbdcde9a81cbdcde9c8b8f8d86cbdcde838bcbddafcbdcdecbdeafcbdeafa2818185878089cbdcde88819c998f9c8acbdcde9a81cbdcde8d868f9a9a878089cf" class="nav-cta">Book a Call</a></li>
+                    <li><a href="https://calendly.com/redriverai/30min" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
                 </ul>
-                <div class="hamburger">
+                <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-logo-wrapper">
-            <img src="logo.png" alt="Red River AI" class="hero-logo">
-        </div>
+        <div class="hero-grid-bg" aria-hidden="true"></div>
         <div class="container">
-            <div class="hero-content">
-                <p class="hero-tagline">Your Business Cheat Code</p>
-                <h1>Stop Wasting Time on Repetitive Tasks</h1>
-                <p class="hero-subtitle">We find your biggest operational bottleneck and build an AI automation that eliminates it — so you can focus on what actually makes you money.</p>
-                <div class="hero-buttons">
-                    <a href="#audit" class="btn btn-primary">Get Free AI Audit</a>
-                    <a href="/cdn-cgi/l/email-protection#3c54595050537c4e59584e554a594e5d55125f5d034f495e56595f4801751b58190e0c50555759190e0c4853190e0c5e535357190e0c5d190e0c5a4e5959190e0c5f5d50501a5e535845017455190e0c6b555050555d51190e7f190c7d190c7d751b51190e0c555248594e594f485958190e0c5552190e0c50595d4e5255525b190e0c51534e59190e0c5d5e534948190e0c6e5958190e0c6e554a594e190e0c7d7512190c7d190c7d7145190e0c525d5159190f7d190e0c190c7d7145190e0c5e494f5552594f4f190f7d190e0c190c7d6c54535259190e0c5249515e594e190f7d190e0c190c7d7e594f48190e0c48555159190e0c4853190e0c4e595d5f54190e0c5159190f7d190e0c190c7d190c7d7053535755525b190e0c5a534e4b5d4e58190e0c4853190e0c5f545d484855525b1d" class="btn btn-secondary">Book a Call</a>
+            <div class="hero-inner">
+                <div class="hero-content reveal">
+                    <div class="hero-status">
+                        <span class="status-dot"></span>
+                        <span>Systems online · Winnipeg, MB</span>
+                    </div>
+                    <p class="hero-tagline">// Your Business Cheat Code</p>
+                    <h1>Stop Wasting Time on <span class="text-accent">Repetitive Tasks</span></h1>
+                    <p class="hero-subtitle">We find your biggest operational bottleneck and build an AI automation that eliminates it — so you can focus on what actually makes you money.</p>
+                    <div class="hero-buttons">
+                        <a href="#audit" class="btn btn-primary btn-pulse">Get Free AI Audit</a>
+                        <a href="https://calendly.com/redriverai/30min" target="_blank" rel="noopener" class="btn btn-secondary">Book a Call</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">18<span class="unit">yrs</span></span>
+                            <span class="hero-stat-label">Enterprise IT</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">3</span>
+                            <span class="hero-stat-label">Production systems</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">$0<span class="unit">/short</span></span>
+                            <span class="hero-stat-label">Operating cost</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">20<span class="unit">yrs</span></span>
+                            <span class="hero-stat-label">Team Canada Judo</span>
+                        </div>
+                    </div>
                 </div>
+                <div class="hero-terminal reveal">
+                    <div class="terminal glass">
+                        <div class="terminal-bar">
+                            <span class="term-dot term-red"></span>
+                            <span class="term-dot term-yellow"></span>
+                            <span class="term-dot term-green"></span>
+                            <span class="terminal-title">redriverai — automation.sh</span>
+                        </div>
+                        <div class="terminal-body" id="terminal-body">
+                            <!-- typed in via script.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Systems Dashboard -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <p class="section-tag">// LIVE SYSTEMS</p>
+            <h2>Production Systems Dashboard</h2>
+            <p class="section-subtitle">Real systems running right now — not slideware. Status pulled from things actually shipping.</p>
+            <div class="dashboard-grid">
+                <div class="status-card glass reveal">
+                    <div class="status-card-head">
+                        <span class="status-icon">🛡️</span>
+                        <div>
+                            <h3>Prairie Shield</h3>
+                            <span class="status-sub">Cyber insurance readiness SaaS</span>
+                        </div>
+                        <span class="status-pill ok">OPERATIONAL</span>
+                    </div>
+                    <div class="status-meta">
+                        <span><span class="status-led ok"></span>135 automated tests</span>
+                        <span>17-table schema · tenant-isolated</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--target:96%"></div></div>
+                    <div class="progress-label"><span>Test coverage</span><span class="mono">135/140</span></div>
+                </div>
+
+                <div class="status-card glass reveal">
+                    <div class="status-card-head">
+                        <span class="status-icon">📊</span>
+                        <div>
+                            <h3>Neutral Bill Bot</h3>
+                            <span class="status-sub">Canadian legislation tracker</span>
+                        </div>
+                        <span class="status-pill ok">POLLING</span>
+                    </div>
+                    <div class="status-meta">
+                        <span><span class="status-led ok"></span>Polls every 6h</span>
+                        <span>3-pass AI pipeline · live</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--target:100%"></div></div>
+                    <div class="progress-label"><span>Uptime</span><span class="mono">99.9%</span></div>
+                </div>
+
+                <div class="status-card glass reveal">
+                    <div class="status-card-head">
+                        <span class="status-icon">🎬</span>
+                        <div>
+                            <h3>Shorts Pipeline</h3>
+                            <span class="status-sub">Faceless video factory</span>
+                        </div>
+                        <span class="status-pill warn">DAILY 06:30</span>
+                    </div>
+                    <div class="status-meta">
+                        <span><span class="status-led warn"></span>Next run scheduled</span>
+                        <span>RSS → LLM → TTS → publish</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--target:100%"></div></div>
+                    <div class="progress-label"><span>Operating cost</span><span class="mono">$0.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <p class="section-tag">// SERVICES</p>
+            <h2>How We Help Prairie Businesses Work Smarter</h2>
+            <p class="section-subtitle">Custom AI solutions built for your specific needs — not one-size-fits-all templates. Security-conscious by default, backed by GIAC certifications (GSEC · GCIH · GSOC).</p>
+            <div class="services-grid">
+                <div class="service-card glass reveal">
+                    <div class="service-icon">🔄</div>
+                    <h3>Workflow Automation</h3>
+                    <p>Automate invoicing, scheduling, data entry, and more with custom n8n workflows. If you're doing it manually, we can probably automate it.</p>
+                </div>
+                <div class="service-card glass reveal">
+                    <div class="service-icon">💬</div>
+                    <h3>AI Chatbots</h3>
+                    <p>24/7 customer service that actually understands your business. Handle inquiries, book appointments, and qualify leads while you sleep.</p>
+                </div>
+                <div class="service-card glass reveal">
+                    <div class="service-icon">📱</div>
+                    <h3>Social Media AI</h3>
+                    <p>Generate engaging content, schedule posts, and respond to comments automatically. Stay active online without being glued to your phone.</p>
+                </div>
+                <div class="service-card glass reveal">
+                    <div class="service-icon">🔒</div>
+                    <h3>Secure by Design</h3>
+                    <p>Every build is hardened by a certified Network &amp; Cybersecurity Analyst (GSEC, GCIH, GSOC). Your automation is fast — and it's safe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <p class="section-tag">// SHIPPED</p>
+            <h2>Built &amp; Shipping</h2>
+            <p class="section-subtitle">Real systems running in production — not slide decks. Here's a sample of what we've designed, built, and deployed.</p>
+            <div class="projects-grid">
+                <div class="project-card glass reveal">
+                    <div class="project-icon">🛡️</div>
+                    <h3>Prairie Shield</h3>
+                    <p class="project-desc">Canada's first cyber insurance readiness assessment platform for SMBs — a multi-tenant SaaS app built end to end.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Next.js 15</span>
+                        <span class="project-tag">PostgreSQL</span>
+                        <span class="project-tag">Clerk Auth</span>
+                        <span class="project-tag">M365 / Google OAuth</span>
+                        <span class="project-tag">BullMQ</span>
+                        <span class="project-tag">RLS Isolation</span>
+                    </div>
+                    <div class="project-metric">17-table schema · 135 automated tests · tenant-isolated by design</div>
+                </div>
+                <div class="project-card glass reveal">
+                    <div class="project-icon">📊</div>
+                    <h3>Neutral Bill Bot</h3>
+                    <p class="project-desc">An automated pipeline that tracks Canadian legislation and turns raw bills into plain-language briefings.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">n8n Workflows</span>
+                        <span class="project-tag">openparliament.ca</span>
+                        <span class="project-tag">3-Pass AI Pipeline</span>
+                        <span class="project-tag">PostgreSQL</span>
+                        <span class="project-tag">REST API</span>
+                        <span class="project-tag">Linux</span>
+                    </div>
+                    <div class="project-metric">Polls every 6 hours · summary → analysis → recommendations · live in production</div>
+                </div>
+                <div class="project-card glass reveal">
+                    <div class="project-icon">🎬</div>
+                    <h3>Faceless Shorts Pipeline</h3>
+                    <p class="project-desc">A fully automated daily YouTube Shorts factory — from idea to published video with zero human touch.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">RSS Aggregation</span>
+                        <span class="project-tag">LLM Scripting</span>
+                        <span class="project-tag">ElevenLabs TTS</span>
+                        <span class="project-tag">ffmpeg Rendering</span>
+                        <span class="project-tag">Auto-Publish</span>
+                    </div>
+                    <div class="project-metric">Ships daily at 6:30 AM · branded video output · $0 operating cost</div>
+                    <a href="#case-study" class="project-case-link">Read the case study →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI in Action Section -->
+    <section id="shorts" class="shorts">
+        <div class="container">
+            <p class="section-tag">// AI IN ACTION</p>
+            <h2>Daily Shorts, Zero Human Touch</h2>
+            <p class="section-subtitle">Created end-to-end by our pipeline — from idea to publish, fully automated.</p>
+            <div class="shorts-grid">
+                <div class="short-card glass reveal">
+                    <div class="short-frame">
+                        <iframe src="https://www.youtube.com/embed/muCwUvxWbPo" title="Anthropic's Safety Warnings Backfired" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <h3 class="short-title">Anthropic's Safety Warnings Backfired</h3>
+                </div>
+                <div class="short-card glass reveal">
+                    <div class="short-frame">
+                        <iframe src="https://www.youtube.com/embed/kIHV1Q_pD2w" title="India debates its AI future" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <h3 class="short-title">India debates its AI future</h3>
+                </div>
+                <div class="short-card glass reveal">
+                    <div class="short-frame">
+                        <iframe src="https://www.youtube.com/embed/AEi6bQtHpV8" title="Harvard AI Teacher" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <h3 class="short-title">Harvard AI Teacher</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <p class="section-tag">// FOUNDER</p>
+            <h2>Built by a Prairie Tech Veteran</h2>
+            <div class="about-content">
+                <div class="about-text reveal">
+                    <p>I'm Willy McKenzie — Métis, from Mitchell, MB, and a Red River College grad. For the past 18 years I've worked at Steinbach Credit Union as a programmer, SQL report writer, and now Network &amp; Cybersecurity Analyst.</p>
+                    <p>Before that, I spent 20 years competing as an international Judoka for <strong>Team Canada</strong>. Judo taught me discipline, how to take a hit, and how to keep showing up. That same mindset is what I bring to every automation I build.</p>
+                    <blockquote class="about-quote">"I've spent 18 years securing systems and writing automation. Now I'm putting that to work for small businesses."</blockquote>
+                    <p>Red River AI isn't a generic AI shop. It's a local, security-conscious shop built by someone who actually knows how the systems work — and how to keep them safe.</p>
+                </div>
+                <div class="about-side reveal">
+                    <div class="about-avatar-card glass">
+                        <div class="about-avatar">WM</div>
+                        <div class="about-avatar-name">Willy McKenzie</div>
+                        <div class="about-avatar-title">Founder, Red River AI</div>
+                    </div>
+                    <div class="cred-grid">
+                        <div class="cred-card glass">
+                            <span class="cred-icon">🔒</span>
+                            <span class="cred-title">GIAC Certified</span>
+                            <span class="cred-sub">GSEC · GCIH · GSOC</span>
+                        </div>
+                        <div class="cred-card glass">
+                            <span class="cred-icon">🏢</span>
+                            <span class="cred-title">18 yrs Enterprise IT</span>
+                            <span class="cred-sub">Steinbach Credit Union</span>
+                        </div>
+                        <div class="cred-card glass">
+                            <span class="cred-icon">🥋</span>
+                            <span class="cred-title">Team Canada Judo</span>
+                            <span class="cred-sub">20 yrs international</span>
+                        </div>
+                        <div class="cred-card glass">
+                            <span class="cred-icon">🌾</span>
+                            <span class="cred-title">Métis — Mitchell, MB</span>
+                            <span class="cred-sub">Red River College grad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section id="case-study" class="case-study">
+        <div class="container">
+            <p class="section-tag">// CASE STUDY</p>
+            <h2>The $0 YouTube Shorts Factory</h2>
+            <p class="section-subtitle">How we built a daily AI-powered content engine — at zero operating cost.</p>
+
+            <div class="case-study-grid">
+                <div class="cs-card cs-problem glass reveal">
+                    <h3>The Problem</h3>
+                    <p>Red River AI needed consistent video content to build brand presence — but creating Shorts manually was slow, expensive, and inconsistent. Hiring editors, writing scripts, recording voiceovers, and rendering videos took hours per Short. At scale, that's unsustainable.</p>
+                </div>
+
+                <div class="cs-card cs-solution glass reveal">
+                    <h3>The Solution</h3>
+                    <p>A fully automated video pipeline running on a ThinkPad T490s in Winnipeg. RSS feeds scrape AI news daily at 6:30 AM. Gemini Flash writes 50-70 word scripts. ElevenLabs generates voiceovers. FFmpeg composites the branded Short — then n8n uploads it to YouTube, X, and Facebook. All automated. All zero cost.</p>
+                </div>
+
+                <div class="cs-card cs-stack glass reveal">
+                    <h3>Tech Stack</h3>
+                    <ul class="cs-stack-list">
+                        <li><strong>n8n</strong> — workflow orchestration &amp; scheduling</li>
+                        <li><strong>OpenRouter</strong> — Gemini Flash via LLM API</li>
+                        <li><strong>ElevenLabs</strong> — AI voice synthesis</li>
+                        <li><strong>FFmpeg</strong> — branded video compositing</li>
+                        <li><strong>FastAPI</strong> — local render service</li>
+                        <li><strong>YouTube / X / Facebook</strong> — multi-platform publish</li>
+                    </ul>
+                </div>
+
+                <div class="cs-card cs-results glass reveal">
+                    <h3>Results</h3>
+                    <div class="cs-metrics">
+                        <div class="cs-metric">
+                            <div class="cs-number">$0</div>
+                            <div class="cs-label">monthly operating cost</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-number">30</div>
+                            <div class="cs-label">Shorts per month</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-number">~2 min</div>
+                            <div class="cs-label">human time per Short</div>
+                        </div>
+                        <div class="cs-metric">
+                            <div class="cs-number">7</div>
+                            <div class="cs-label">feeds scraped daily</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cs-takeaway glass reveal">
+                <p>A content pipeline that would cost $200-$500/month with SaaS tools — or $2,000+/month with human creators — runs for $0. The only costs are ElevenLabs API credits (still on free tier) and OpenRouter (a few cents per generation). That's automation at prairie prices.</p>
             </div>
         </div>
     </section>
@@ -81,12 +396,13 @@
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
         <div class="container">
+            <p class="section-tag">// PRICING</p>
             <h2>Simple, Transparent Pricing</h2>
             <p class="section-subtitle">No retainers required to start. No surprise fees. Just results.</p>
             <div class="pricing-grid pricing-grid-3">
-                <div class="pricing-card">
+                <div class="pricing-card glass reveal">
                     <h3>Bottleneck Elimination</h3>
-                    <div class="price">$997 CAD</div>
+                    <div class="price">$997 <span class="price-cur">CAD</span></div>
                     <p class="price-subtitle">One-time. Your biggest time-waster, gone.</p>
                     <ul class="pricing-features">
                         <li>Discovery call to find your #1 bottleneck</li>
@@ -96,26 +412,26 @@
                         <li>30-day check-in call included</li>
                         <li>10+ hours/week saved — guaranteed</li>
                     </ul>
-                    <a href="https://buy.stripe.com/cNi14m58FctDcbQ3xbes001" target="_blank" class="btn btn-primary btn-block">Get Started</a>
+                    <a href="https://buy.stripe.com/cNi14m58FctDcbQ3xbes001" target="_blank" rel="noopener" class="btn btn-primary btn-block">Get Started</a>
                 </div>
-                <div class="pricing-card featured">
+                <div class="pricing-card featured glass reveal">
                     <div class="badge">Best Value</div>
                     <h3>Growth Retainer</h3>
-                    <div class="price">$400 CAD<span class="price-period">/month</span></div>
+                    <div class="price">$400 <span class="price-cur">CAD</span><span class="price-period">/month</span></div>
                     <p class="price-subtitle">Keep it running. Keep it growing.</p>
                     <ul class="pricing-features">
-                        <li>Ongoing monitoring & maintenance</li>
+                        <li>Ongoing monitoring &amp; maintenance</li>
                         <li>Workflow updates and improvements</li>
                         <li>Priority support (response within 4 hours)</li>
                         <li>Monthly performance review call</li>
                         <li>One new automation per month included</li>
                         <li>Discounted rate on additional builds</li>
                     </ul>
-                    <a href="https://buy.stripe.com/eVqfZg9oV79j0t80kZes002" target="_blank" class="btn btn-primary btn-block">Get Started</a>
+                    <a href="https://buy.stripe.com/eVqfZg9oV79j0t80kZes002" target="_blank" rel="noopener" class="btn btn-primary btn-block">Get Started</a>
                 </div>
-                <div class="pricing-card">
+                <div class="pricing-card glass reveal">
                     <h3>Full Automation Partner</h3>
-                    <div class="price">$1,500 CAD<span class="price-period">/month</span></div>
+                    <div class="price">$1,500 <span class="price-cur">CAD</span><span class="price-period">/month</span></div>
                     <p class="price-subtitle">Your on-call AI team.</p>
                     <ul class="pricing-features">
                         <li>Everything in Growth Retainer</li>
@@ -123,93 +439,58 @@
                         <li>Dedicated Slack channel</li>
                         <li>Same-day support response</li>
                         <li>Quarterly strategy session</li>
-                        <li>First to access new AI tools & integrations</li>
+                        <li>First to access new AI tools &amp; integrations</li>
                     </ul>
-                    <a href="https://buy.stripe.com/8x26oG44BdxH4Jo8Rves003" target="_blank" class="btn btn-secondary btn-block">Get Started</a>
+                    <a href="https://buy.stripe.com/8x26oG44BdxH4Jo8Rves003" target="_blank" rel="noopener" class="btn btn-secondary btn-block">Get Started</a>
                 </div>
             </div>
             <p class="pricing-note">Start with the one-time build. Most clients add a retainer within 30 days. <a href="#audit">Get your free audit first →</a></p>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2>How We Help Prairie Businesses Work Smarter</h2>
-            <p class="section-subtitle">Custom AI solutions built for your specific needs — not one-size-fits-all templates.</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🔄</div>
-                    <h3>Workflow Automation</h3>
-                    <p>Automate invoicing, scheduling, data entry, and more with custom n8n workflows. If you're doing it manually, we can probably automate it.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💬</div>
-                    <h3>AI Chatbots</h3>
-                    <p>24/7 customer service that actually understands your business. Handle inquiries, book appointments, and qualify leads while you sleep.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>Social Media AI</h3>
-                    <p>Generate engaging content, schedule posts, and respond to comments automatically. Stay active online without being glued to your phone.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Business Consulting</h3>
-                    <p>Not sure where to start? We analyze your operations and identify the highest-impact automation opportunities for your business.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Built by a Prairie Tech Veteran</h2>
-                    <p>I'm Willy McKenzie — Métis, from Mitchell, MB, and a Red River College grad. For the past 18 years I've worked at Steinbach Credit Union as a programmer, SQL report writer, and now Network &amp; Cybersecurity Analyst.</p>
-                    <p>Before that, I spent 20 years competing as an international Judoka for <strong>Team Canada</strong>. Judo taught me discipline, how to take a hit, and how to keep showing up. That same mindset is what I bring to every automation I build.</p>
-                    <blockquote class="about-quote">"I've spent 18 years securing systems and writing automation. Now I'm putting that to work for small businesses."</blockquote>
-                    <p>Red River AI isn't a generic AI shop. It's a local, security-conscious shop built by someone who actually knows how the systems work — and how to keep them safe.</p>
-                    <div class="about-badges">
-                        <span class="about-badge">🥋 Team Canada Judo</span>
-                        <span class="about-badge">🔒 Cybersecurity Analyst</span>
-                        <span class="about-badge">🌾 Métis — Mitchell, MB</span>
-                        <span class="about-badge">18 yrs Enterprise IT</span>
-                    </div>
-                </div>
-                <div class="about-avatar-wrap">
-                    <div class="about-avatar">WM</div>
-                    <div class="about-avatar-name">Willy McKenzie</div>
-                    <div class="about-avatar-title">Founder, Red River AI</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Free AI Audit Section -->
     <section id="audit" class="audit">
         <div class="container">
+            <p class="section-tag">// FREE AUDIT</p>
             <div class="audit-content">
-                <div class="audit-text">
+                <div class="audit-text reveal">
                     <h2>Get Your Free AI Automation Audit</h2>
                     <p>Tell us about your biggest time-wasters and we'll send you a personalized report showing exactly how AI can help — no strings attached.</p>
                     <ul class="audit-benefits">
-                        <li>✓ Custom analysis of your business processes</li>
-                        <li>✓ Specific automation recommendations</li>
-                        <li>✓ Estimated time and cost savings</li>
-                        <li>✓ Priority roadmap for implementation</li>
+                        <li>Custom analysis of your business processes</li>
+                        <li>Specific automation recommendations</li>
+                        <li>Estimated time and cost savings</li>
+                        <li>Priority roadmap for implementation</li>
                     </ul>
                 </div>
-                <div class="audit-form-wrapper">
-                    <form id="auditForm" class="audit-form">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Email Address" required>
-                        <input type="text" name="businessName" placeholder="Business Name" required>
-                        <textarea name="timeWaster" placeholder="What's your biggest time-waster at work?" rows="4" required></textarea>
-                        <button type="submit" class="btn btn-primary btn-block">Get My Free Audit</button>
-                        <p class="form-note">100% free. No credit card required. Results in 24 hours.</p>
+                <div class="audit-form-wrapper reveal">
+                    <form id="auditForm" class="audit-form glass">
+                        <div class="audit-form-bar">
+                            <span class="term-dot term-red"></span>
+                            <span class="term-dot term-yellow"></span>
+                            <span class="term-dot term-green"></span>
+                            <span class="terminal-title">request --free-audit</span>
+                        </div>
+                        <div class="audit-form-body">
+                            <label class="audit-label"><span class="mono prompt">~$</span> name</label>
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <label class="audit-label"><span class="mono prompt">~$</span> email</label>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                            <label class="audit-label"><span class="mono prompt">~$</span> business</label>
+                            <input type="text" name="businessName" placeholder="Business Name" required>
+                            <fieldset class="audit-radio-group">
+                                <legend><span class="mono prompt">~$</span> biggest time-waster?</legend>
+                                <label class="audit-radio"><input type="radio" name="timeWaster" value="Invoicing / billing" required> Invoicing / billing</label>
+                                <label class="audit-radio"><input type="radio" name="timeWaster" value="Customer emails & follow-ups"> Customer emails &amp; follow-ups</label>
+                                <label class="audit-radio"><input type="radio" name="timeWaster" value="Scheduling & appointments"> Scheduling &amp; appointments</label>
+                                <label class="audit-radio"><input type="radio" name="timeWaster" value="Social media posting"> Social media posting</label>
+                                <label class="audit-radio"><input type="radio" name="timeWaster" value="Data entry & reports"> Data entry &amp; reports</label>
+                                <label class="audit-radio"><input type="radio" name="timeWaster" value="Other"> Other</label>
+                                <input type="text" name="otherTimeWaster" id="otherTimeWaster" class="audit-other-input" placeholder="Tell us more..." style="display:none">
+                            </fieldset>
+                            <button type="submit" class="btn btn-primary btn-block">Get My Free Audit</button>
+                            <p class="form-note">100% free. No credit card required. Results in 24 hours.</p>
+                        </div>
                     </form>
                     <div class="form-message" id="formMessage"></div>
                 </div>
@@ -217,59 +498,117 @@
         </div>
     </section>
 
-    <!-- Testimonials Section - hidden until real testimonials are available -->
-    <!--
-    <section id="testimonials" class="testimonials">
+    <!-- What We're Building Section -->
+    <section id="building" class="building">
         <div class="container">
-            <h2>What Manitoba Business Owners Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p>"Red River AI automated our entire invoicing process. What used to take 5 hours a week now happens automatically. Game changer!"</p>
-                    <div class="testimonial-author">
-                        <strong>Sarah M.</strong>
-                        <span>Construction Company Owner, Winnipeg</span>
+            <p class="section-tag">// CHANGELOG</p>
+            <h2>What We're Building</h2>
+            <p class="section-subtitle">Real projects shipping in real time. Here's what's new.</p>
+            <div class="building-timeline">
+                <div class="building-entry reveal">
+                    <div class="building-date mono">June 14</div>
+                    <div class="building-dot"></div>
+                    <div class="building-card glass">
+                        <h3>Prairie Shield Phase 1 Complete</h3>
+                        <p>Canada's first cyber insurance readiness platform for SMBs shipped its first milestone. 17-table PostgreSQL schema, Next.js 15 frontend, Clerk auth, M365 &amp; Google Workspace OAuth, BullMQ job processing, 135 automated tests.</p>
+                        <div class="building-tags">
+                            <span class="building-tag">Next.js</span>
+                            <span class="building-tag">PostgreSQL</span>
+                            <span class="building-tag">AI Pipeline</span>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"Their chatbot handles 80% of our customer questions. Our team can finally focus on actual sales instead of answering the same questions all day."</p>
-                    <div class="testimonial-author">
-                        <strong>Mike R.</strong>
-                        <span>Retail Store Manager, Brandon</span>
+                <div class="building-entry reveal">
+                    <div class="building-date mono">June 9</div>
+                    <div class="building-dot"></div>
+                    <div class="building-card glass">
+                        <h3>Neutral Bill Bot Goes Live</h3>
+                        <p>Automated Canadian legislation tracker now running in production. Polls openparliament.ca every 6 hours, runs a 3-pass AI pipeline for summaries and analysis, serves results via REST API on Linux.</p>
+                        <div class="building-tags">
+                            <span class="building-tag">n8n</span>
+                            <span class="building-tag">PostgreSQL</span>
+                            <span class="building-tag">Linux</span>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"Worth every penny. The social media automation alone saves me 10+ hours a week. I can actually take weekends off now!"</p>
-                    <div class="testimonial-author">
-                        <strong>Jennifer L.</strong>
-                        <span>Restaurant Owner, Steinbach</span>
+                <div class="building-entry reveal">
+                    <div class="building-date mono">June 7</div>
+                    <div class="building-dot"></div>
+                    <div class="building-card glass">
+                        <h3>Faceless Shorts Pipeline Ships</h3>
+                        <p>Zero-cost daily YouTube Shorts factory went live. End-to-end automation from RSS feeds to LLM scripting, ElevenLabs voice synthesis, ffmpeg rendering, and auto-publish — all for $0.</p>
+                        <div class="building-tags">
+                            <span class="building-tag">ffmpeg</span>
+                            <span class="building-tag">ElevenLabs</span>
+                            <span class="building-tag">LLM</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    -->
 
     <!-- Footer -->
     <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
+                    <img src="logo.png" alt="Red River AI" class="footer-logo">
                     <p>Your business cheat code.<br>Based in Manitoba, serving Western Canada.</p>
                 </div>
                 <div class="footer-contact">
                     <h4>Ready to save time?</h4>
                     <p>Book a free consultation to see how AI can transform your business.</p>
-                    <a href="/cdn-cgi/l/email-protection#5c34393030331c2e39382e352a392e3d35723f3d632f293e36393f2861157b38796e6c30353739796e6c2833796e6c3e333337796e6c3d796e6c3a2e3939796e6c3f3d3030342e393a61" mailto:hello@redriverai.ca"body=Hi%20William%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%20Red%20River%20AI.%0A%0AMy%20name%3A%20%0AMy%20business%3A%20%0APhone%20number%3A%20%0ABest%20time%20to%20reach%20me%3A%20%0A%0ALooking%20forward%20to%20chatting!" class="btn btn-primary">Book a Free Call</a>
+                    <a href="#audit" class="btn btn-primary">Get Your Free Audit</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 Red River AI. All rights reserved.</p>
-                <p>redriverai.ca</p>
+                <div class="footer-links">
+                    <a href="/privacy.html">Privacy Policy</a>
+                </div>
+                <p class="mono">redriverai.ca</p>
             </div>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script src="script.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script>
+    <script>
+        // Cookie consent logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const consentGiven = localStorage.getItem('cookieConsent') === 'true';
+
+            if (!consentGiven) {
+                const banner = document.createElement('div');
+                banner.id = 'cookie-consent-banner';
+                banner.innerHTML = `
+                    <div class="consent-content">
+                        <p>We use analytics to improve your experience. By continuing, you agree to our <a href="/privacy.html">Privacy Policy</a>.</p>
+                        <div class="consent-buttons">
+                            <button id="accept-consent" class="btn btn-primary">Accept</button>
+                            <a href="/privacy.html" class="btn btn-secondary">Privacy Policy</a>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(banner);
+
+                document.getElementById('accept-consent').addEventListener('click', function() {
+                    localStorage.setItem('cookieConsent', 'true');
+                    banner.remove();
+                    initializeTracking();
+                });
+            } else {
+                initializeTracking();
+            }
+
+            function initializeTracking() {
+                if (typeof initializeVisitorLogging === 'function') {
+                    initializeVisitorLogging();
+                }
+            }
+        });
+    </script>
+    <script src="script.js"></script>
     <!-- Chat widget -->
     <link rel="stylesheet" href="chat-widget.css">
     <script src="chat-widget.js" defer></script>
