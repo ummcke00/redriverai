@@ -9,10 +9,10 @@
     --surface:       #13131a;
     --surface-2:     #1a1a24;
     --border:        #2a2a3a;
-    --primary:       #c8102e;
-    --primary-2:     #e51b3e;
-    --primary-glow:  rgba(200, 16, 46, 0.15);
-    --primary-glow-strong: rgba(200, 16, 46, 0.35);
+    --primary:       #c81010;
+    --primary-2:     #e51414;
+    --primary-glow:  rgba(200, 16, 16, 0.15);
+    --primary-glow-strong: rgba(200, 16, 16, 0.35);
     --text:          #e8e8ec;
     --text-muted:    #8888a0;
     --text-dim:      #5a5a6e;
@@ -153,6 +153,23 @@ section h2 {
     100% { box-shadow: 0 0 0 1px rgba(200,16,46,0.4), 0 0 0 0 rgba(200,16,46,0); }
 }
 
+/* Navbar with text logo */
+.nav-logo-with-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-logo-text {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
 /* ---------- Navbar ---------- */
 .navbar {
     position: fixed;
@@ -170,7 +187,7 @@ section h2 {
     justify-content: space-between;
     height: 68px;
 }
-.nav-logo-img { height: 38px; width: auto; }
+.nav-logo-img { height: 46px; width: auto; }
 .nav-menu {
     display: flex;
     align-items: center;
@@ -202,6 +219,43 @@ section h2 {
     border: none;
     cursor: pointer;
     padding: 6px;
+}
+.hero-terminal {
+    position: relative;
+    z-index: 1;
+}
+/* New Logo Badge Styles */
+.logo-badge-container {
+    position: absolute;
+    top: -35px; /* Position above the terminal */
+    right: -40px; /* Position to the right edge */
+    z-index: 2; /* Above other elements */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-badge {
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(160deg, rgba(30,30,42,0.85), rgba(26,26,36,0.75));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 0 2px rgba(200, 16, 16, 0.25), 0 0 20px var(--primary-glow-strong);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.logo-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px rgba(200, 16, 16, 0.4), 0 0 30px var(--primary-glow-strong);
+}
+.logo-badge-icon {
+    width: 80px;
+    height: auto;
+    display: block;
 }
 .hamburger span {
     width: 26px; height: 2px;
@@ -953,7 +1007,38 @@ section h2 {
     .hero-stats { grid-template-columns: repeat(4, auto); gap: 22px; }
 }
 
+/* Logo badge responsive adjustments */
+@media (max-width: 1024px) {
+    .logo-badge-container {
+        top: -25px;
+        right: -30px;
+    }
+    .logo-badge {
+        width: 120px;
+        height: 120px;
+    }
+    .logo-badge-icon {
+        width: 70px;
+    }
+}
+
 @media (max-width: 768px) {
+    .logo-badge-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: -25px;
+        margin-left: auto;
+        margin-right: 20px;
+        width: fit-content;
+    }
+    .logo-badge {
+        width: 100px;
+        height: 100px;
+    }
+    .logo-badge-icon {
+        width: 60px;
+    }
     section { padding: 70px 0; }
 
     /* Mobile slide-in drawer nav */
