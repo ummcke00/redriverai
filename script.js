@@ -1,44 +1,13 @@
 /* =========================================================
    Red River AI — Prairie Cyber Noir
-   Terminal animation · visitor logging · form handling ·
+   Terminal animation · form handling ·
    mobile nav · smooth scroll · reveal-on-scroll · progress bars
+
+   Note: custom n8n visitor-logging webhook was removed 2026-07-02
+   (endpoint was broken/gone — 500 + no CORS headers, silently
+   failing on every page load). Google Analytics (already wired in
+   via CSP + GA script tag) is the analytics source of truth now.
    ========================================================= */
-
-/* ---------------------------------------------------------
-   Visitor Logging — ping n8n on every page load (with consent).
-   Sends visitor data after user gives consent to our Privacy
-   Policy, in compliance with PIPEDA.
-   --------------------------------------------------------- */
-function initializeVisitorLogging() {
-    (function () {
-        try {
-            fetch('https://automatemybuisness.oph.st/webhook/redriverai-visit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer d869f45e4a6c6399b0a033f013d67d17aeee91cc95308c2143f3955c7e605511'
-                },
-                body: JSON.stringify({
-                    timestamp: new Date().toISOString(),
-                    page: window.location.pathname,
-                    referrer: document.referrer || 'direct',
-                    language: navigator.language,
-                    screenWidth: window.screen.width
-                    // userAgent removed — strong fingerprinting vector, GA already captures this
-                })
-            }).catch(() => {}); // silent fail — never interrupts the site
-        } catch (e) {}
-    })();
-}
-
-// Initialize tracking based on consent status after everything is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-        if (localStorage.getItem('cookieConsent') === 'true') initializeVisitorLogging();
-    });
-} else {
-    if (localStorage.getItem('cookieConsent') === 'true') initializeVisitorLogging();
-}
 
 /* ---------------------------------------------------------
    Terminal typing animation
