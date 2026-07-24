@@ -510,6 +510,7 @@ section h2 {
 }
 .service-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
 .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+.service-price { color: var(--accent) !important; font-weight: 700; font-size: 1.05rem !important; margin-top: 10px; }
 
 /* ---------- Projects ---------- */
 .projects-grid {
