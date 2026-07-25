@@ -137,21 +137,69 @@ a { color: var(--accent); text-decoration: none; }
 
 /* ---------- Hero ---------- */
 .hero {
-    padding: 120px 0 100px;
+    padding: 100px 0 80px;
     text-align: center;
 }
 
+.hero-logo {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
 .hero h1 {
-    font-size: 3rem;
-    max-width: 700px;
-    margin: 0 auto 1.25rem;
+    font-size: 2.2rem;
+    max-width: 650px;
+    margin: 0 auto 0.75rem;
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: var(--text-soft);
-    max-width: 560px;
+    max-width: 520px;
     margin: 0 auto 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ---------- Training Offer ---------- */
+.training-offer {
+    padding: 0 0 80px;
+}
+
+.card-training-hero {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 36px;
+}
+
+.card-training-hero .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.card-training-hero h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.card-training-hero p {
+    color: var(--text-soft);
+    margin-bottom: 12px;
+}
+
+.card-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 20px;
 }
 
 /* ---------- Tabs ---------- */
