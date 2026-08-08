@@ -1,0 +1,194 @@
+[
+  {
+    "id": "F001",
+    "name": "Hero Section",
+    "status": "done",
+    "phase": 1,
+    "description": "Main hero with Red River AI branding, logo badge, headline, CTA. Full-logo lockup (icon+wordmark) with transparent background.",
+    "tests": ["verify-site.py check 3 (logo renders)"]
+  },
+  {
+    "id": "F002",
+    "name": "Navigation Bar",
+    "status": "done",
+    "phase": 1,
+    "description": "Sticky nav with logo, Services/Pricing/About links, Contact CTA button. 46px height (bumped from 38px).",
+    "tests": ["verify-site.py check 3 (nav logo)"]
+  },
+  {
+    "id": "F003",
+    "name": "Services Section",
+    "status": "done",
+    "phase": 1,
+    "description": "AI Automation, Chatbots, AI Training service cards with descriptions.",
+    "tests": ["visual inspection"]
+  },
+  {
+    "id": "F004",
+    "name": "Pricing Cards",
+    "status": "done",
+    "phase": 1,
+    "description": "Starter ($500/1 automation), Growth ($1,000/3 automations), Enterprise (custom). Growth card featured. Prices posted transparently.",
+    "tests": ["verify-site.py check 4 (pricing contrast)"]
+  },
+  {
+    "id": "F005",
+    "name": "1-on-1 AI Training Service",
+    "status": "done",
+    "phase": 1,
+    "description": "Dedicated training offer section ($100/session + tax). Added Jul 2026.",
+    "tests": ["visual inspection"]
+  },
+  {
+    "id": "F006",
+    "name": "About / Judo Story Section",
+    "status": "done",
+    "phase": 1,
+    "description": "Willy's background — 18 years at SCU, international judoka for Team Canada, Métis heritage. Story-driven credibility.",
+    "tests": ["visual inspection"]
+  },
+  {
+    "id": "F007",
+    "name": "Footer",
+    "status": "done",
+    "phase": 1,
+    "description": "Site footer with logo, links, copyright.",
+    "tests": ["visual inspection"]
+  },
+  {
+    "id": "F008",
+    "name": "Logo Integration",
+    "status": "done",
+    "phase": 1,
+    "description": "Logo by Willy's wife treated with respect. Transparent full-logo lockup via flood-fill background removal. Present in nav, hero, footer.",
+    "tests": ["verify-site.py check 3"]
+  },
+  {
+    "id": "F009",
+    "name": "Favicon Suite",
+    "status": "done",
+    "phase": 1,
+    "description": "Favicon in multiple sizes (16, 32, 192, 512), apple-touch-icon, .ico. Theme color #fdfaf8.",
+    "tests": ["verify-site.py check 1 (reachability confirms 200)"]
+  },
+  {
+    "id": "F010",
+    "name": "Light Theme",
+    "status": "done",
+    "phase": 1,
+    "description": "Warm off-white bg (#fdfaf8), logo-red accents (#a90000/#cc0c0c). Replaced dark 'Prairie Cyber Noir' theme Jul 2026.",
+    "tests": ["verify-site.py check 4 (contrast ratios)"]
+  },
+  {
+    "id": "F011",
+    "name": "GA4 Analytics",
+    "status": "done",
+    "phase": 1,
+    "description": "Google Analytics 4 tracking via gtag (G-GRGXSPHVJF). Weekly GA4 report cron (Mondays 9am CDT).",
+    "tests": ["verify-site.py check 1 (page loads with gtag)"]
+  },
+  {
+    "id": "F012",
+    "name": "ElevenLabs Voice Widget (River)",
+    "status": "done",
+    "phase": 1,
+    "description": "River voice assistant via ElevenLabs convai widget. Origin-locked to redriverai.ca. CSP configured for worker-src blob: and connect-src elevenlabs.io.",
+    "tests": ["verify-site.py check 5 (widget loads, no console errors)"]
+  },
+  {
+    "id": "F013",
+    "name": "Chat Widget Removal",
+    "status": "done",
+    "phase": 1,
+    "description": "Text chat widget deliberately removed (chat-widget.js/.css). Voice assistant (River) stays. Guarded by verify-site.py check 7.",
+    "tests": ["verify-site.py check 7 (chat-widget NOT loaded)"]
+  },
+  {
+    "id": "F014",
+    "name": "CSP Headers",
+    "status": "done",
+    "phase": 1,
+    "description": "Content-Security-Policy via _headers (Cloudflare Pages). script-src, connect-src, worker-src with blob:. Has been fragile — stray quotes, worker-src blob: regression.",
+    "tests": ["verify-site.py check 2 (CSP validity)"]
+  },
+  {
+    "id": "F015",
+    "name": "WWW Redirect",
+    "status": "done",
+    "phase": 1,
+    "description": "www.redriverai.ca → redriverai.ca redirect via Cloudflare Pages _redirects file.",
+    "tests": ["verify-site.py check 1 (both apex and www return 200)"]
+  },
+  {
+    "id": "F016",
+    "name": "Privacy Policy",
+    "status": "done",
+    "phase": 1,
+    "description": "/privacy.html page with data handling disclosure.",
+    "tests": ["curl redriverai.ca/privacy.html returns 200"]
+  },
+  {
+    "id": "F017",
+    "name": "Cloudflare Pages Deploy Script",
+    "status": "done",
+    "phase": 1,
+    "description": "deploy.sh — one-command wrangler pages deploy with pre-flight checks. Direct-upload project (no git auto-deploy). Requires CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID.",
+    "tests": ["deploy.sh pre-flight checks"]
+  },
+  {
+    "id": "F018",
+    "name": "Post-Deploy Verification Suite",
+    "status": "done",
+    "phase": 1,
+    "description": "scripts/verify-site.py — 7 automated checks: reachability, CSP, logos, pricing contrast, voice widget, screenshots, chat-widget removal. Built Jul 2026 after dark-text/blank-screenshot incidents.",
+    "tests": ["python3 scripts/verify-site.py (self-testing)"]
+  },
+  {
+    "id": "F019",
+    "name": "SEO Pages (Geo-Targeted)",
+    "status": "done",
+    "phase": 1,
+    "description": "Landing pages for ai-automation-winnipeg, business-automation-manitoba, winnipeg-small-business-automation. SEO-targeted content.",
+    "tests": ["curl returns 200 for each"]
+  },
+  {
+    "id": "F020",
+    "name": "Social Meta Tags",
+    "status": "done",
+    "phase": 1,
+    "description": "Open Graph and Twitter Card meta tags for social sharing previews.",
+    "tests": ["view page source, confirm og:title/og:image/twitter:card present"]
+  },
+  {
+    "id": "F021",
+    "name": "Blog / Content Section",
+    "status": "planned",
+    "phase": 2,
+    "description": "Blog or articles section for content marketing. Not yet built.",
+    "tests": []
+  },
+  {
+    "id": "F022",
+    "name": "Contact Form",
+    "status": "planned",
+    "phase": 2,
+    "description": "Functional contact form (currently just a mailto link or CTA). Needs backend or form service.",
+    "tests": []
+  },
+  {
+    "id": "F023",
+    "name": "Git Auto-Deploy (CI/CD)",
+    "status": "planned",
+    "phase": 2,
+    "description": "Cloudflare Pages git integration so pushes auto-deploy. Currently manual direct-upload only.",
+    "tests": []
+  },
+  {
+    "id": "F024",
+    "name": "Automated Nightly Screenshot Diff",
+    "status": "planned",
+    "phase": 2,
+    "description": "Run verify-site.py nightly, diff screenshots against baseline, alert on visual drift.",
+    "tests": []
+  }
+]
