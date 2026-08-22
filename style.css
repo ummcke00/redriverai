@@ -168,6 +168,32 @@ a { color: var(--accent); text-decoration: none; }
     flex-wrap: wrap;
 }
 
+/* ---------- AI Audit ---------- */
+.audit {
+    padding: 0 0 80px;
+}
+
+.card-audit-hero {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 36px;
+}
+
+.card-audit-hero .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.card-audit-hero h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.card-audit-hero p {
+    color: var(--text-soft);
+}
+
 /* ---------- Training Offer ---------- */
 .training-offer {
     padding: 0 0 80px;
