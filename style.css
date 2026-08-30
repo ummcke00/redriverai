@@ -194,6 +194,28 @@ a { color: var(--accent); text-decoration: none; }
     color: var(--text-soft);
 }
 
+/* ---------- Free A/R Aging Check ---------- */
+.card-ar-hero {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 36px;
+}
+
+.card-ar-hero .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.card-ar-hero h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.card-ar-hero p {
+    color: var(--text-soft);
+}
+
 /* ---------- Training Offer ---------- */
 .training-offer {
     padding: 0 0 80px;
@@ -313,6 +335,13 @@ a { color: var(--accent); text-decoration: none; }
 .pricing-card .price-desc {
     margin-bottom: 1.5rem;
     min-height: 3em;
+}
+
+.pricing-card .price-measure {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: -0.75rem 0 1.5rem;
 }
 
 .pricing-card.featured {
