@@ -1,0 +1,29 @@
+# Red River AI
+
+> Custom AI automation for Manitoba and prairie businesses. n8n workflow automation, AI chatbots, social media AI, and 1-on-1 AI training. Prices posted.
+
+Red River AI is based in Winnipeg, Manitoba, Canada. We build practical AI automations for small and medium businesses — no hype, just results. Run by Willy McKenzie: 18 years in programming, SQL, and cybersecurity; GIAC certified (GSEC, GCIH, GSOC).
+
+## Services
+
+- Workflow Automation: custom n8n workflows for invoicing, scheduling, data entry. If you do it by hand every week, we automate it.
+- AI Chatbots: chatbots that answer questions, book appointments, and qualify leads 24/7.
+- Social Media AI: content drafted, scheduled, and posted automatically across Facebook, LinkedIn, and Instagram.
+- 1-on-1 AI Training: hands-on coaching for you or your team — prompting, n8n, automating your actual workflows. $200/session + tax.
+
+## Pricing (CAD)
+
+- Starter: $500 — 1 custom automation, built and launched.
+- Growth: $1,000 — 3 automations. The usual pick.
+- Enterprise: Custom — bigger systems, ongoing work.
+
+## Service Area
+
+Winnipeg, Brandon, Steinbach, and across Manitoba and the prairies.
+
+## How to Hire Us
+
+- Book a 30-minute call: https://calendly.com/redriverai/30min
+- Email: hello@redriverai.ca
+- Free AI audit: https://redriverai.ca/audit.html
+- Website: https://redriverai.ca/

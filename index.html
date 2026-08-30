@@ -36,6 +36,94 @@
         gtag('js', new Date());
         gtag('config', 'G-GRGXSPHVJF');
     </script>
+
+    <!-- Structured data for AI agents and search engines -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "ProfessionalService",
+                "@id": "https://redriverai.ca/#organization",
+                "name": "Red River AI",
+                "url": "https://redriverai.ca/",
+                "logo": "https://redriverai.ca/logo.png",
+                "description": "Red River AI builds custom AI automations for Manitoba businesses — n8n workflow automation, AI chatbots, social media AI, and 1-on-1 AI training. Prices posted.",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Winnipeg",
+                    "addressRegion": "MB",
+                    "addressCountry": "CA"
+                },
+                "areaServed": ["Winnipeg", "Brandon", "Steinbach", "Manitoba"],
+                "email": "hello@redriverai.ca",
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Pricing",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "name": "Starter",
+                            "description": "1 custom automation, built and launched.",
+                            "price": "500",
+                            "priceCurrency": "CAD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "name": "Growth",
+                            "description": "3 automations. The usual pick.",
+                            "price": "1000",
+                            "priceCurrency": "CAD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "name": "Enterprise",
+                            "description": "Bigger systems, ongoing work. Let's talk."
+                        }
+                    ]
+                }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://redriverai.ca/#workflow-automation",
+                "name": "Workflow Automation",
+                "description": "Invoicing, scheduling, data entry — custom n8n workflow automation for Winnipeg and Manitoba businesses. If you do it by hand every week, we automate it.",
+                "provider": { "@id": "https://redriverai.ca/#organization" },
+                "areaServed": "Manitoba"
+            },
+            {
+                "@type": "Service",
+                "@id": "https://redriverai.ca/#ai-chatbots",
+                "name": "AI Chatbots",
+                "description": "AI chatbots that answer questions, book appointments, and qualify leads 24/7. Works nights and weekends so your team doesn't have to.",
+                "provider": { "@id": "https://redriverai.ca/#organization" },
+                "areaServed": "Manitoba"
+            },
+            {
+                "@type": "Service",
+                "@id": "https://redriverai.ca/#social-media-ai",
+                "name": "Social Media AI",
+                "description": "Content drafted, scheduled, and posted automatically across Facebook, LinkedIn, and Instagram. Stay visible without being glued to your phone.",
+                "provider": { "@id": "https://redriverai.ca/#organization" },
+                "areaServed": "Manitoba"
+            },
+            {
+                "@type": "Service",
+                "@id": "https://redriverai.ca/#ai-training",
+                "name": "1-on-1 AI Training",
+                "description": "Hands-on coaching for you or your team. Prompting, n8n, automating your actual workflows. No theory.",
+                "provider": { "@id": "https://redriverai.ca/#organization" },
+                "areaServed": "Manitoba",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "200",
+                    "priceCurrency": "CAD",
+                    "description": "$200/session + tax"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
