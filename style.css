@@ -376,6 +376,49 @@ a { color: var(--accent); text-decoration: none; }
     height: auto;
 }
 
+/* ---------- Métis Nation flag ---------- */
+.metis-flag {
+    display: inline-block;
+    width: 132px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    margin-top: 1.75rem;
+}
+
+.metis-flag-figure {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.metis-flag-caption {
+    display: block;
+    margin-top: 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-soft);
+}
+
+.footer-flag {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.25rem;
+}
+
+.footer-flag img {
+    width: 54px;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+}
+
+.footer-flag span {
+    font-size: 0.85rem;
+    color: #b8afa9;
+}
+
 /* ---------- Case Studies ---------- */
 .case-studies { background: #faf4f0; }
 
@@ -475,6 +518,7 @@ a { color: var(--accent); text-decoration: none; }
     .about-text { text-align: center; }
 
     .footer-top { grid-template-columns: 1fr; text-align: center; }
+    .footer-flag { justify-content: center; }
     .footer-bottom { flex-direction: column; gap: 0.8rem; }
 
     .hamburger { display: flex; }
