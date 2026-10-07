@@ -5,3 +5,5 @@ verify-runs/
 # Sub-agent briefing files — have contained credentials inline
 claude-code-brief.md
 *-brief.md
+functions/
+.wrangler/
