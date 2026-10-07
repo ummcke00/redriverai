@@ -41,9 +41,7 @@
     '  </header>',
     '  <div id="river-log" aria-live="polite"></div>',
     '  <div id="river-controls">',
-    '    <button id="river-mic" aria-label="Hold to talk">🎙️ Talk</button>',
-    '    <input id="river-text" placeholder="or type your question" autocomplete="off">',
-    '    <button id="river-send" aria-label="Send">Send</button>',
+    '    <button id="river-mic" aria-label="Talk to River">🎙️ Tap to talk</button>',
     '  </div>',
     '  <div id="river-foot">',
     '    <a id="river-book" href="' + CALENDLY + '" target="_blank" rel="noopener">Book a call &rarr;</a>',
@@ -73,10 +71,8 @@
     '.river-bot{align-self:flex-start;background:#f2efec;color:var(--ink);border-bottom-left-radius:4px}',
     '.river-sys{align-self:center;font-size:12px;color:#8a8a8a}',
     '#river-controls{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #eee}',
-    '#river-mic{background:var(--rrai);color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-size:14px}',
+    '#river-mic{flex:1;background:var(--rrai);color:#fff;border:0;border-radius:10px;padding:13px 14px;cursor:pointer;font-size:15px;font-weight:600}',
     '#river-mic.on{background:#0a7d33}',
-    '#river-text{flex:1;min-width:0;border:1px solid #ddd;border-radius:10px;padding:10px;font-size:14px}',
-    '#river-send{border:0;background:#eee;border-radius:10px;padding:10px 12px;cursor:pointer;font-size:14px}',
     '#river-foot{padding:0 12px 12px}',
     '#river-book{font-size:13px;color:var(--rrai);text-decoration:none;font-weight:600}',
     '@media (prefers-reduced-motion:reduce){#river-fab:hover{transform:none}}'
@@ -215,14 +211,6 @@
     stopSpeaking();
   });
   micBtn.addEventListener("click", startListening);
-  $("river-send").addEventListener("click", function () {
-    var el = $("river-text");
-    ask(el.value);
-    el.value = "";
-  });
-  $("river-text").addEventListener("keydown", function (e) {
-    if (e.key === "Enter") { ask(this.value); this.value = ""; }
-  });
 
   // ---------- auto-open on arrival ----------
   // Panel opens by default so visitors see River without hunting for a button.
