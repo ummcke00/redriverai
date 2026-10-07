@@ -26,11 +26,12 @@
   var root = document.createElement("div");
   root.id = "river-widget";
   root.innerHTML = [
-    '<button id="river-fab" aria-label="Talk to River">',
-    '  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">',
+    '<button id="river-fab" aria-label="Chat with River">',
+    '  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">',
     '    <path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Z"/>',
     '    <path fill="currentColor" d="M18 12a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.93V23h2v-3.07A8 8 0 0 0 20 12h-2Z"/>',
     '  </svg>',
+    '  <span>Ask River</span>',
     '</button>',
     '<section id="river-panel" hidden>',
     '  <header id="river-head">',
@@ -53,10 +54,13 @@
   var style = document.createElement("style");
   style.textContent = [
     '#river-widget{--rrai:#a90000;--ink:#1b1b1b;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif}',
-    '#river-fab{position:fixed;right:20px;bottom:20px;z-index:2147483000;width:58px;height:58px;',
-    'border:0;border-radius:50%;background:var(--rrai);color:#fff;cursor:pointer;',
-    'box-shadow:0 6px 20px rgba(0,0,0,.28);display:grid;place-items:center}',
-    '#river-fab:hover{transform:scale(1.05)}',
+    '#river-fab{position:fixed;right:20px;bottom:20px;z-index:2147483000;',
+    'display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:0;border-radius:999px;',
+    'background:var(--rrai);color:#fff;cursor:pointer;font-size:15px;font-weight:600;',
+    'box-shadow:0 6px 20px rgba(0,0,0,.3)}',
+    '#river-fab:hover{transform:scale(1.03)}',
+    '#river-widget.river-lifted #river-fab{bottom:120px}',
+    '#river-widget.river-lifted #river-panel{bottom:190px}',
     '#river-panel{position:fixed;right:20px;bottom:90px;z-index:2147483000;width:min(360px,calc(100vw - 32px));',
     'background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden}',
     '#river-head{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--rrai);color:#fff}',
@@ -193,17 +197,20 @@
   }
 
   // ---------- wiring ----------
-  $("river-fab").addEventListener("click", function () {
+  function openPanel() {
     panel.hidden = false;
     $("river-fab").style.display = "none";
     if (!log.childElementCount) {
-      bubble("Hi, I'm River. Ask about our services, pricing, or the free AI audit.", "river-bot");
+      bubble("Hi, I'm River \u2014 the Red River AI assistant. Ask me about our services, pricing, or the free AI audit. Tap \u2018Talk\u2019 and just speak.", "river-bot");
     }
     setStatus("Ask about our services or pricing");
-  });
+  }
+
+  $("river-fab").addEventListener("click", openPanel);
   $("river-close").addEventListener("click", function () {
     panel.hidden = true;
     $("river-fab").style.display = "grid";
+    try { sessionStorage.setItem("riverDismissed", "1"); } catch (e) {}
     pauseListening();
     stopSpeaking();
   });
@@ -216,4 +223,23 @@
   $("river-text").addEventListener("keydown", function (e) {
     if (e.key === "Enter") { ask(this.value); this.value = ""; }
   });
+
+  // ---------- auto-open on arrival ----------
+  // Panel opens by default so visitors see River without hunting for a button.
+  // Respect a dismissal for the rest of the browser session so it isn't nagging.
+  // If the cookie banner is showing, lift clear of it.
+  function liftIfBanner() {
+    var banner = document.getElementById("cookie-consent-banner");
+    if (banner) document.getElementById("river-widget").classList.add("river-lifted");
+  }
+  liftIfBanner();
+  setInterval(liftIfBanner, 1500);
+
+  try {
+    if (sessionStorage.getItem("riverDismissed") !== "1") {
+      setTimeout(openPanel, 1200);
+    }
+  } catch (e) {
+    setTimeout(openPanel, 1200);
+  }
 })();
