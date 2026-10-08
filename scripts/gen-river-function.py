@@ -81,7 +81,7 @@ export async function onRequestPost(context) {
     const r = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "***" + key,
+        "Authorization": "Bearer " + key,
         "Content-Type": "application/json",
         "HTTP-Referer": "https://redriverai.ca",
         "X-Title": "River - Red River AI",
@@ -103,7 +103,7 @@ export async function onRequestPost(context) {
   try {
     const tr = await fetch("https://openrouter.ai/api/v1/audio/speech", {
       method: "POST",
-      headers: { "Authorization": "***" + key, "Content-Type": "application/json" },
+      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: TTS_MODEL, input: reply, voice: VOICE_ID, response_format: "mp3",
       }),
