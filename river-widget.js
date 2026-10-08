@@ -105,10 +105,7 @@
   canvas.height = CH * DPR;
   cctx.scale(DPR, DPR);
 
-  var POINTS = 56;
-  var baseR = 42;
-  var radii = new Float32Array(POINTS).fill(baseR);
-  var smooth = new Float32Array(POINTS).fill(baseR);
+  var baseR = 44;
   var t = 0;
 
   function drawOrb() {
@@ -116,86 +113,40 @@
     var cx = CW / 2, cy = CH / 2;
 
     // how "loud" are we right now?
-    var level = 0, bands = null;
+    var level = 0;
     if (mode === "speaking" && analyser && freqData) {
       analyser.getByteFrequencyData(freqData);
-      bands = freqData;
       var sum = 0;
       for (var i = 0; i < 32; i++) sum += freqData[i];
       level = Math.min(sum / (32 * 200), 1);
     }
 
-    // per-point radius from the voice spectrum, or a gentle breathe when idle
-    for (var p = 0; p < POINTS; p++) {
-      var ang = (p / POINTS) * Math.PI * 2;
-      var target = baseR;
-      if (bands) {
-        // map the spectrum around the ring
-        var bi = Math.floor((p / POINTS) * 40);
-        var v = bands[bi] / 255;
-        target = baseR + v * 20 + level * 6;
-      } else if (mode === "listening") {
-        target = baseR + Math.sin(t * 3 + ang * 5) * 4.5;
-      } else if (mode === "thinking") {
-        target = baseR + Math.sin(t * 4 + ang * 3) * 3;
-      } else {
-        target = baseR + Math.sin(t * 1.2 + ang * 2) * 2.5;
-      }
-      radii[p] = target;
-      smooth[p] += (radii[p] - smooth[p]) * 0.22;   // ease toward target
-    }
+    // one clean round ball. It only breathes / swells -- no wobble, no rings.
+    var scale = 1;
+    if (mode === "speaking")      scale = 1 + level * 0.12;
+    else if (mode === "thinking") scale = 1 + Math.sin(t * 2.4) * 0.03;
+    else if (mode === "listening") scale = 1 + Math.sin(t * 1.8) * 0.035;
+    else                           scale = 1 + Math.sin(t * 1.0) * 0.022;
+    var r = baseR * scale;
 
-    // outer glow
-    var g0 = cctx.createRadialGradient(cx, cy, baseR * 0.5, cx, cy, baseR + 34 + level * 14);
-    g0.addColorStop(0, "rgba(201,13,45,0.30)");
+    // soft halo
+    var g0 = cctx.createRadialGradient(cx, cy, r * 0.7, cx, cy, r + 24);
+    g0.addColorStop(0, "rgba(201,13,45,0.22)");
     g0.addColorStop(1, "rgba(201,13,45,0)");
     cctx.fillStyle = g0;
-    cctx.beginPath(); cctx.arc(cx, cy, baseR + 34 + level * 14, 0, Math.PI * 2); cctx.fill();
+    cctx.beginPath(); cctx.arc(cx, cy, r + 24, 0, Math.PI * 2); cctx.fill();
 
-    // the blob
-    cctx.beginPath();
-    for (var q = 0; q <= POINTS; q++) {
-      var i2 = q % POINTS;
-      var a2 = (i2 / POINTS) * Math.PI * 2;
-      var x = cx + Math.cos(a2) * smooth[i2];
-      var y = cy + Math.sin(a2) * smooth[i2];
-      if (q === 0) cctx.moveTo(x, y); else cctx.lineTo(x, y);
-    }
-    cctx.closePath();
-    var g1 = cctx.createRadialGradient(cx - 12, cy - 14, 6, cx, cy, baseR + 22);
-    g1.addColorStop(0, "#ff5a6e");
-    g1.addColorStop(0.55, "#c8102e");
-    g1.addColorStop(1, "#8f0010");
+    // the sphere: light from the upper-left, darkening toward the rim
+    var g1 = cctx.createRadialGradient(cx - r * 0.33, cy - r * 0.36, r * 0.10, cx, cy, r);
+    g1.addColorStop(0, "#ff6f80");
+    g1.addColorStop(0.55, "#cc1233");
+    g1.addColorStop(1, "#8c0010");
     cctx.fillStyle = g1;
-    cctx.fill();
-
-    // thinking: a rotating highlight sweep
-    if (mode === "thinking") {
-      cctx.save();
-      cctx.beginPath(); cctx.arc(cx, cy, baseR + 6, 0, Math.PI * 2); cctx.clip();
-      cctx.translate(cx, cy); cctx.rotate(t * 3);
-      var g2 = cctx.createLinearGradient(0, -baseR, 0, baseR);
-      g2.addColorStop(0, "rgba(255,255,255,0.34)");
-      g2.addColorStop(1, "rgba(255,255,255,0)");
-      cctx.fillStyle = g2;
-      cctx.fillRect(-baseR, -baseR, baseR * 2, baseR * 2);
-      cctx.restore();
-    }
-
-    // listening: expanding ring
-    if (mode === "listening") {
-      var ringR = baseR + 10 + ((t * 26) % 22);
-      var alpha = 0.5 * (1 - ((t * 26) % 22) / 22);
-      cctx.beginPath();
-      cctx.arc(cx, cy, ringR, 0, Math.PI * 2);
-      cctx.strokeStyle = "rgba(200,16,46," + alpha.toFixed(3) + ")";
-      cctx.lineWidth = 2;
-      cctx.stroke();
-    }
+    cctx.beginPath(); cctx.arc(cx, cy, r, 0, Math.PI * 2); cctx.fill();
   }
 
   function loop() {
-    t += 0.045;
+    t += 0.03;
     drawOrb();
     requestAnimationFrame(loop);
   }
