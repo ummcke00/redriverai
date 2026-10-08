@@ -1,19 +1,20 @@
 /**
- * River — Red River AI voice assistant (AUDIO ONLY).
+ * River — Red River AI voice assistant (AUDIO ONLY, animated orb).
  *
- * No text chat. No transcript. The visitor hears River and talks back.
+ * Visual: a living orb drawn on a canvas that reacts to River's actual voice
+ * (Web Audio AnalyserNode on the playing audio) — the same feel as the old
+ * ElevenLabs convai widget, but ours and free.
  *
  * Flow:
- *   page load    -> prefetch the spoken greeting (audio) in the background
- *   first tap/⏎   -> River greets out loud, then starts listening automatically
- *   speak        -> transcribed -> /api/river -> River replies -> listens again
- *   ...hands-free loop until the visitor closes the widget.
+ *   page load   -> prefetch the spoken greeting (audio)
+ *   first tap   -> River greets out loud, then listens automatically
+ *   speak       -> transcribed -> /api/river -> River replies -> listens again
+ *   ...hands-free until the visitor taps End or closes.
  *
  * Voice in  : browser Web Speech API
  * Voice out : OpenRouter ElevenLabs (server-side)
  *
- * Browser rule we cannot bypass: audio needs ONE user gesture before it may play.
- * So the greeting fires on the visitor's first tap anywhere on the page.
+ * Browser rule we cannot bypass: audio needs ONE user gesture before it plays.
  */
 (function () {
   "use strict";
@@ -22,10 +23,9 @@
   var CALENDLY = "https://calendly.com/redriverai/30min";
 
   var history = [];
-  var mode = "idle";        // idle | greeting | listening | thinking | speaking
-  var active = false;       // in a live voice conversation?
-  var greetingB64 = null;   // prefetched opener
-  var currentAudio = null;
+  var mode = "idle";        // idle | listening | thinking | speaking
+  var active = false;
+  var greetingB64 = null;
   var recognizer = null;
   var restartTimer = null;
 
@@ -46,9 +46,8 @@
     '    <button id="river-close" aria-label="Close">&times;</button>',
     '  </header>',
     '  <div id="river-stage">',
-    '    <div id="river-orb" aria-hidden="true"></div>',
+    '    <canvas id="river-orb" width="296" height="296" aria-hidden="true"></canvas>',
     '    <p id="river-state">Tap anywhere to start</p>',
-    '    <p id="river-hint">You can talk to River — hands free.</p>',
     '  </div>',
     '  <div id="river-controls">',
     '    <button id="river-main">Start</button>',
@@ -69,94 +68,215 @@
     '#river-fab:hover{transform:scale(1.03)}',
     '#river-widget.river-lifted #river-fab{bottom:120px}',
     '#river-widget.river-lifted #river-panel{bottom:190px}',
-    '#river-panel{position:fixed;right:20px;bottom:90px;z-index:2147483000;width:min(340px,calc(100vw - 32px));',
-    'background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden}',
+    '#river-panel{position:fixed;right:20px;bottom:90px;z-index:2147483000;width:min(320px,calc(100vw - 32px));',
+    'background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden}',
     '#river-head{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--rrai);color:#fff}',
     '#river-title{font-weight:700;flex:1}',
     '#river-close{background:none;border:0;color:#fff;font-size:22px;line-height:1;cursor:pointer}',
-    '#river-stage{display:flex;flex-direction:column;align-items:center;gap:12px;padding:26px 18px 20px;text-align:center}',
-    '#river-orb{width:74px;height:74px;border-radius:50%;background:var(--rrai);opacity:.9;',
-    'box-shadow:0 0 0 0 rgba(169,0,0,.5);transition:transform .2s}',
-    '#river-orb.listening{animation:river-pulse 1.6s infinite}',
-    '#river-orb.speaking{animation:river-pulse .9s infinite}',
-    '#river-orb.thinking{animation:river-spin 1.1s linear infinite}',
-    '@keyframes river-pulse{0%{box-shadow:0 0 0 0 rgba(169,0,0,.55)}70%{box-shadow:0 0 0 22px rgba(169,0,0,0)}100%{box-shadow:0 0 0 0 rgba(169,0,0,0)}}',
-    '@keyframes river-spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}',
-    '#river-state{font-size:16px;font-weight:600;margin:0}',
-    '#river-hint{font-size:13px;color:#7c7c7c;margin:0}',
+    '#river-stage{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 16px 12px;text-align:center}',
+    '#river-orb{width:148px;height:148px;display:block}',
+    '#river-state{font-size:14px;font-weight:600;margin:0;color:#555}',
     '#river-controls{padding:0 14px 14px}',
     '#river-main{width:100%;background:var(--rrai);color:#fff;border:0;border-radius:10px;padding:13px 14px;cursor:pointer;font-size:15px;font-weight:600}',
     '#river-main.stop{background:#444}',
     '#river-foot{padding:0 14px 14px}',
     '#river-book{font-size:13px;color:var(--rrai);text-decoration:none;font-weight:600}',
-    '@media (prefers-reduced-motion:reduce){#river-orb{animation:none!important}#river-fab:hover{transform:none}}'
+    '@media (prefers-reduced-motion:reduce){#river-fab:hover{transform:none}}'
   ].join("");
   document.head.appendChild(style);
   document.body.appendChild(root);
 
   var $ = function (id) { return document.getElementById(id); };
-  var panel = $("river-panel"), orb = $("river-orb"), state = $("river-state"),
-      hint = $("river-hint"), mainBtn = $("river-main");
+  var panel = $("river-panel"), canvas = $("river-orb"), state = $("river-state"),
+      mainBtn = $("river-main");
 
-  function setState(m, text, hintText) {
+  function setState(m, text) {
     mode = m;
-    orb.className = m === "listening" ? "listening"
-                 : m === "speaking" ? "speaking"
-                 : m === "thinking" ? "thinking" : "";
     if (text) state.textContent = text;
-    if (hintText !== undefined) hint.textContent = hintText;
     mainBtn.textContent = active ? "End conversation" : "Start";
     mainBtn.classList.toggle("stop", active);
   }
 
-  // ---------- audio out ----------
+  // ================= animated orb =================
+  var cctx = canvas.getContext("2d");
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var CW = 148, CH = 148;
+  canvas.width = CW * DPR;
+  canvas.height = CH * DPR;
+  cctx.scale(DPR, DPR);
+
+  var POINTS = 56;
+  var baseR = 42;
+  var radii = new Float32Array(POINTS).fill(baseR);
+  var smooth = new Float32Array(POINTS).fill(baseR);
+  var t = 0;
+
+  function drawOrb() {
+    cctx.clearRect(0, 0, CW, CH);
+    var cx = CW / 2, cy = CH / 2;
+
+    // how "loud" are we right now?
+    var level = 0, bands = null;
+    if (mode === "speaking" && analyser && freqData) {
+      analyser.getByteFrequencyData(freqData);
+      bands = freqData;
+      var sum = 0;
+      for (var i = 0; i < 32; i++) sum += freqData[i];
+      level = Math.min(sum / (32 * 200), 1);
+    }
+
+    // per-point radius from the voice spectrum, or a gentle breathe when idle
+    for (var p = 0; p < POINTS; p++) {
+      var ang = (p / POINTS) * Math.PI * 2;
+      var target = baseR;
+      if (bands) {
+        // map the spectrum around the ring
+        var bi = Math.floor((p / POINTS) * 40);
+        var v = bands[bi] / 255;
+        target = baseR + v * 20 + level * 6;
+      } else if (mode === "listening") {
+        target = baseR + Math.sin(t * 3 + ang * 5) * 4.5;
+      } else if (mode === "thinking") {
+        target = baseR + Math.sin(t * 4 + ang * 3) * 3;
+      } else {
+        target = baseR + Math.sin(t * 1.2 + ang * 2) * 2.5;
+      }
+      radii[p] = target;
+      smooth[p] += (radii[p] - smooth[p]) * 0.22;   // ease toward target
+    }
+
+    // outer glow
+    var g0 = cctx.createRadialGradient(cx, cy, baseR * 0.5, cx, cy, baseR + 34 + level * 14);
+    g0.addColorStop(0, "rgba(201,13,45,0.30)");
+    g0.addColorStop(1, "rgba(201,13,45,0)");
+    cctx.fillStyle = g0;
+    cctx.beginPath(); cctx.arc(cx, cy, baseR + 34 + level * 14, 0, Math.PI * 2); cctx.fill();
+
+    // the blob
+    cctx.beginPath();
+    for (var q = 0; q <= POINTS; q++) {
+      var i2 = q % POINTS;
+      var a2 = (i2 / POINTS) * Math.PI * 2;
+      var x = cx + Math.cos(a2) * smooth[i2];
+      var y = cy + Math.sin(a2) * smooth[i2];
+      if (q === 0) cctx.moveTo(x, y); else cctx.lineTo(x, y);
+    }
+    cctx.closePath();
+    var g1 = cctx.createRadialGradient(cx - 12, cy - 14, 6, cx, cy, baseR + 22);
+    g1.addColorStop(0, "#ff5a6e");
+    g1.addColorStop(0.55, "#c8102e");
+    g1.addColorStop(1, "#8f0010");
+    cctx.fillStyle = g1;
+    cctx.fill();
+
+    // thinking: a rotating highlight sweep
+    if (mode === "thinking") {
+      cctx.save();
+      cctx.beginPath(); cctx.arc(cx, cy, baseR + 6, 0, Math.PI * 2); cctx.clip();
+      cctx.translate(cx, cy); cctx.rotate(t * 3);
+      var g2 = cctx.createLinearGradient(0, -baseR, 0, baseR);
+      g2.addColorStop(0, "rgba(255,255,255,0.34)");
+      g2.addColorStop(1, "rgba(255,255,255,0)");
+      cctx.fillStyle = g2;
+      cctx.fillRect(-baseR, -baseR, baseR * 2, baseR * 2);
+      cctx.restore();
+    }
+
+    // listening: expanding ring
+    if (mode === "listening") {
+      var ringR = baseR + 10 + ((t * 26) % 22);
+      var alpha = 0.5 * (1 - ((t * 26) % 22) / 22);
+      cctx.beginPath();
+      cctx.arc(cx, cy, ringR, 0, Math.PI * 2);
+      cctx.strokeStyle = "rgba(200,16,46," + alpha.toFixed(3) + ")";
+      cctx.lineWidth = 2;
+      cctx.stroke();
+    }
+  }
+
+  function loop() {
+    t += 0.045;
+    drawOrb();
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // ================= audio out (+ analyser) =================
+  var audioEl = null, actx = null, analyser = null, freqData = null, srcNode = null;
+
+  function ensureAudio() {
+    if (!audioEl) {
+      audioEl = new Audio();
+      audioEl.setAttribute("playsinline", "");
+      audioEl.preload = "auto";
+    }
+    if (!actx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) {
+        try {
+          actx = new AC();
+          analyser = actx.createAnalyser();
+          analyser.fftSize = 256;
+          analyser.smoothingTimeConstant = 0.78;
+          freqData = new Uint8Array(analyser.frequencyBinCount);
+          srcNode = actx.createMediaElementSource(audioEl);
+          srcNode.connect(analyser);
+          analyser.connect(actx.destination);
+        } catch (e) {
+          // Graph failed — sound still plays through the element directly.
+          actx = null; analyser = null; freqData = null;
+        }
+      }
+    }
+    if (actx && actx.state === "suspended") { actx.resume().catch(function () {}); }
+  }
+
   function playB64(b64, onDone) {
     if (!b64) { if (onDone) onDone(); return; }
+    ensureAudio();
     try {
       var bytes = atob(b64);
       var buf = new Uint8Array(bytes.length);
       for (var i = 0; i < bytes.length; i++) buf[i] = bytes.charCodeAt(i);
       var url = URL.createObjectURL(new Blob([buf], { type: "audio/mpeg" }));
-      if (currentAudio) { try { currentAudio.pause(); } catch (e) {} }
-      currentAudio = new Audio(url);
-      currentAudio.onended = function () {
-        URL.revokeObjectURL(url);
-        if (currentAudio === this) currentAudio = null;
+      if (audioEl._url) { try { URL.revokeObjectURL(audioEl._url); } catch (e) {} }
+      audioEl._url = url;
+      audioEl.src = url;
+      audioEl.onended = function () {
+        if (audioEl._url) { try { URL.revokeObjectURL(audioEl._url); } catch (e) {} audioEl._url = null; }
         if (onDone) onDone();
       };
-      currentAudio.play().catch(function () { if (onDone) onDone(); });
+      audioEl.play().catch(function () { if (onDone) onDone(); });
     } catch (e) { if (onDone) onDone(); }
   }
 
-  // ---------- speech in ----------
+  function stopAudio() {
+    if (audioEl) { try { audioEl.pause(); audioEl.currentTime = 0; } catch (e) {} }
+  }
+
+  // ================= speech in =================
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (SR) {
     recognizer = new SR();
     recognizer.lang = "en-CA";
-    recognizer.interimResults = true;     // feel responsive; final decides
     recognizer.continuous = false;
+    recognizer.interimResults = false;
     recognizer.onresult = function (e) {
-      var finalText = "", interim = "";
+      var said = "";
       for (var i = e.resultIndex; i < e.results.length; i++) {
-        var r = e.results[i];
-        if (r.isFinal) finalText += r[0].transcript; else interim += r[0].transcript;
+        if (e.results[i].isFinal) said += e.results[i][0].transcript;
       }
-      if (interim) state.textContent = "…" + interim.trim();
-      if (finalText.trim()) {
+      said = said.trim();
+      if (said) {
         if (restartTimer) { clearTimeout(restartTimer); restartTimer = null; }
-        var said = finalText.trim();
-        setState("thinking", "One moment…", "");
         ask(said);
       }
     };
     recognizer.onerror = function (e) {
-      if (e.error === "no-speech") {              // just silence — keep listening
-        if (active) scheduleListen(600);
-        return;
-      }
+      if (e.error === "no-speech") { if (active) scheduleListen(600); return; }
       if (e.error === "not-allowed" || e.error === "service-not-allowed") {
-        setState("idle", "Microphone blocked", "Allow mic access in your browser, then tap Start.");
         active = false;
+        setState("idle", "Microphone blocked — allow mic access, then tap Start");
         return;
       }
       if (active) scheduleListen(900);
@@ -171,8 +291,7 @@
     if (restartTimer) clearTimeout(restartTimer);
     restartTimer = setTimeout(function () {
       restartTimer = null;
-      if (!active) return;
-      startListening();
+      if (active) startListening();
     }, delay);
   }
 
@@ -180,17 +299,14 @@
     if (!recognizer || !active) return;
     try {
       recognizer.start();
-      setState("listening", "Listening…", "Speak now.");
-    } catch (e) {
-      // already started — retry shortly
-      scheduleListen(500);
-    }
+      setState("listening", "Listening…");
+    } catch (e) { scheduleListen(500); }
   }
 
-  // ---------- brain ----------
+  // ================= brain =================
   function ask(message) {
     history.push({ role: "user", content: message });
-    setState("thinking", "One moment…", "");
+    setState("thinking", "One moment…");
 
     fetch(ENDPOINT, {
       method: "POST",
@@ -199,49 +315,40 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        var reply = d.reply || "Sorry, I had trouble just now. Please email hello@redriverai.ca.";
+        var reply = d.reply || "Sorry, I had trouble just now.";
         history.push({ role: "assistant", content: reply });
-        setState("speaking", "River is talking…", "Tap End to stop.");
-        playB64(d.audio_b64, function () {
-          if (active) scheduleListen(500);
-        });
+        setState("speaking", "River is talking…");
+        playB64(d.audio_b64, function () { if (active) scheduleListen(500); });
       })
       .catch(function () {
-        setState("speaking", "River is talking…", "");
-        playB64(null, function () {
-          if (active) scheduleListen(500);
-        });
+        setState("speaking", "River is talking…");
+        playB64(null, function () { if (active) scheduleListen(500); });
       });
   }
 
-  // ---------- conversation control ----------
+  // ================= control =================
   function begin() {
     if (active) return;
+    if (!SR) { setState("idle", "Voice isn't supported here — try Chrome, Edge, or Safari"); return; }
     active = true;
-    if (!SR) {
-      setState("idle", "Voice isn't supported in this browser",
-               "Try Chrome, Edge, or Safari.");
-      active = false;
-      return;
-    }
-    setState("speaking", "River is talking…", "");
+    ensureAudio();
+    setState("speaking", "River is talking…");
     if (greetingB64) {
       playB64(greetingB64, function () { if (active) scheduleListen(400); });
     } else {
-      ask("__greet__");   // fallback if the prefetch didn't land
+      ask("__greet__");
     }
   }
 
   function end() {
     active = false;
     if (restartTimer) { clearTimeout(restartTimer); restartTimer = null; }
-    if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
+    stopAudio();
     if (recognizer) { try { recognizer.abort(); } catch (e) {} }
     history = [];
-    setState("idle", "Tap anywhere to start", "You can talk to River — hands free.");
+    setState("idle", "Tap anywhere to start");
   }
 
-  // ---------- prefetch the greeting ----------
   function prefetchGreeting() {
     fetch(ENDPOINT, {
       method: "POST",
@@ -253,13 +360,13 @@
       .catch(function () {});
   }
 
-  // ---------- wiring ----------
+  // ================= wiring =================
   function openPanel() {
     panel.hidden = false;
     $("river-fab").style.display = "none";
   }
 
-  $("river-fab").addEventListener("click", function () { openPanel(); });
+  $("river-fab").addEventListener("click", openPanel);
   $("river-close").addEventListener("click", function () {
     end();
     panel.hidden = true;
@@ -268,7 +375,7 @@
   });
   mainBtn.addEventListener("click", function () { active ? end() : begin(); });
 
-  // One tap anywhere starts the conversation (browser blocks audio before a gesture).
+  // One tap anywhere starts it (browser blocks audio before a gesture).
   function firstGesture() {
     document.removeEventListener("pointerdown", firstGesture, true);
     document.removeEventListener("touchstart", firstGesture, true);
@@ -279,7 +386,7 @@
   document.addEventListener("touchstart", firstGesture, true);
   document.addEventListener("keydown", firstGesture, true);
 
-  // ---------- auto-open on arrival ----------
+  // Keep clear of the cookie banner.
   function liftIfBanner() {
     if (document.getElementById("cookie-consent-banner")) {
       $("river-widget").classList.add("river-lifted");
