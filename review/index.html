@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free 15-Minute Review: Where Is Your Business Losing Hours? | Red River AI</title>
+    <meta name="description" content="Book a free 15-minute call with Willy McKenzie of Red River AI. Find out which repetitive work in your Manitoba business can be automated. No pitch, no commitment.">
+    <link rel="canonical" href="https://redriverai.ca/review/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://redriverai.ca/review/">
+    <meta property="og:title" content="Free 15-minute review: where is your business losing hours?">
+    <meta property="og:description" content="A free call with Willy McKenzie, Red River AI. Manitoba-based.">
+    <meta property="og:image" content="https://redriverai.ca/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRGXSPHVJF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GRGXSPHVJF');
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <a href="/" class="nav-logo">
+                <img src="/logo-full-transparent.png" alt="Red River AI" class="nav-logo-img">
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Where is your business losing hours?</h1>
+            <p class="hero-subtitle">Book a free 15-minute call with Willy McKenzie. You tell me what eats your week: quotes, invoices, data entry, evening admin. I tell you what can be automated and roughly what it would save. No pitch, no commitment.</p>
+            <div class="hero-buttons">
+                <a id="book-review" href="https://calendly.com/redriverai/30min" target="_blank" rel="noopener" class="btn btn-primary">Book my free review</a>
+            </div>
+            <p class="hero-subtitle" style="margin-top:1.5rem;font-size:0.95rem;">Manitoba-based. 18 years building and securing banking systems. Prices posted on <a href="/#pricing">the main site</a>.</p>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 Red River AI. <a href="/" style="color: inherit;">redriverai.ca</a> | <a href="/privacy.html" style="color: inherit;">Privacy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carry the reel's utm_source into Calendly so bookings show which platform sent them.
+        (function () {
+            var p = new URLSearchParams(window.location.search);
+            var a = document.getElementById('book-review');
+            var keys = ['utm_source', 'utm_medium', 'utm_campaign'];
+            var u = new URL(a.href);
+            keys.forEach(function (k) { if (p.get(k)) u.searchParams.set(k, p.get(k)); });
+            a.href = u.toString();
+            a.addEventListener('click', function () {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'book_review_click', { source: p.get('utm_source') || 'direct' });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
