@@ -60,3 +60,81 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+/* ---------------------------------------------------------
+   Conversion tracking
+   One place for every "money" action, so GA4 can answer
+   "did the site produce a lead?" instead of guessing.
+   --------------------------------------------------------- */
+function track(name, params) {
+    if (typeof gtag === 'function') {
+        gtag('event', name, Object.assign({ transport_type: 'beacon' }, params || {}));
+    }
+}
+window.rrTrack = track;
+
+/* Bookings: every Calendly link, anywhere */
+document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
+    link.addEventListener('click', () => track('book_call_click', { link_url: link.href }));
+});
+
+/* Email clicks */
+document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => track('email_click', { link_url: link.getAttribute('href') }));
+});
+
+/* Pricing in view = buying signal */
+const pricingEl = document.getElementById('pricing');
+if (pricingEl && 'IntersectionObserver' in window) {
+    let seen = false;
+    new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+            if (en.isIntersecting && !seen) { seen = true; track('view_pricing'); }
+        });
+    }, { threshold: 0.4 }).observe(pricingEl);
+}
+
+/* ---------------------------------------------------------
+   Newsletter signup
+   Was action="mailto:" — silently dead in every modern
+   browser. Now posts to n8n, origin-gated.
+   --------------------------------------------------------- */
+const nlForm = document.getElementById('newsletter-form');
+if (nlForm) {
+    nlForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email');
+        const msg = document.getElementById('newsletter-msg');
+        const btn = nlForm.querySelector('button[type="submit"]');
+        if (!email || !email.value) return;
+
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Signing up...';
+
+        try {
+            const res = await fetch('https://automatemybuisness.oph.st/webhook/newsletter-signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ body: { email: email.value, source: 'footer' } })
+            });
+            if (!res.ok) throw new Error('bad status ' + res.status);
+
+            nlForm.style.display = 'none';
+            if (msg) {
+                msg.textContent = 'Thanks - you are on the list.';
+                msg.style.display = 'block';
+                msg.style.color = '#7dd3a0';
+            }
+            track('newsletter_signup');
+        } catch (err) {
+            btn.disabled = false;
+            btn.textContent = original;
+            if (msg) {
+                msg.textContent = 'That did not go through. Try again in a moment.';
+                msg.style.display = 'block';
+                msg.style.color = '#ff9a9a';
+            }
+        }
+    });
+}

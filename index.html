@@ -324,10 +324,11 @@
                 <div class="footer-newsletter">
                     <h4>Stay in the loop</h4>
                     <p>Occasional notes on what we're building. No spam.</p>
-                    <form class="newsletter-form" action="mailto:hello@redriverai.ca" method="post" enctype="text/plain">
-                        <input type="email" name="email" placeholder="Your email" required aria-label="Email address">
+                    <form class="newsletter-form" id="newsletter-form">
+                        <input type="email" name="email" id="newsletter-email" placeholder="Your email" required aria-label="Email address">
                         <button type="submit" class="btn btn-primary">Sign up</button>
                     </form>
+                    <p id="newsletter-msg" style="display:none;margin-top:.6rem;font-size:.9rem;"></p>
                 </div>
             </div>
             <div class="footer-bottom">

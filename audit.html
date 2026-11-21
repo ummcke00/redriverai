@@ -9,6 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Analytics: this page had NO tracking at all, so audit conversions were invisible -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRGXSPHVJF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GRGXSPHVJF');
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -64,8 +72,7 @@
         submitBtn.textContent = 'Generating your audit...';
 
         try {
-            const response = await fetch('https://automatemybuisness.oph.st/webhook/ai-audit', {
-                method: 'POST',
+            const response = await fetch('https://automatemybuisness.oph.st/webhook/ai-audit', {                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     body: {
@@ -80,6 +87,9 @@
             if (response.ok) {
                 document.getElementById('audit-form').style.display = 'none';
                 document.getElementById('audit-success').style.display = 'block';
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audit_submit', { transport_type: 'beacon' });
+                }
             } else {
                 throw new Error('Submission failed');
             }
