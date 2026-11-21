@@ -116,7 +116,7 @@ if (nlForm) {
             const res = await fetch('https://automatemybuisness.oph.st/webhook/newsletter-signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ body: { email: email.value, source: 'footer' } })
+                body: JSON.stringify({ email: email.value, source: 'footer' })
             });
             if (!res.ok) throw new Error('bad status ' + res.status);
 

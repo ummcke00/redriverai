@@ -75,12 +75,10 @@
             const response = await fetch('https://automatemybuisness.oph.st/webhook/ai-audit', {                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    body: {
-                        name: document.getElementById('name').value,
-                        business: document.getElementById('business').value,
-                        email: document.getElementById('email').value,
-                        timeWaster: document.getElementById('timeWaster').value
-                    }
+                    name: document.getElementById('name').value,
+                    business: document.getElementById('business').value,
+                    email: document.getElementById('email').value,
+                    timeWaster: document.getElementById('timeWaster').value
                 })
             });
 
